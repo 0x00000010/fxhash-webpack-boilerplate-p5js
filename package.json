@@ -1,5 +1,5 @@
 {
-  "name": "fxhash-boilerplate-webpack",
+  "name": "fxhash-boilerplate-webpack-p5js",
   "version": "1.0.0",
   "description": "a boilerplate to create a generative token on fxhash",
   "main": "index.js",
