@@ -1,3 +1,5 @@
+import p5 from 'p5'
+
 // these are the variables you can use as inputs to your algorithms
 console.log(fxhash)   // the 64 chars hex number fed to your algorithm
 console.log(fxrand()) // deterministic PRNG function, use it instead of Math.random()
@@ -20,10 +22,32 @@ console.log(fxrand()) // deterministic PRNG function, use it instead of Math.ran
 //   "Inverted": true
 // }
 
-// this code writes the values to the DOM as an example
-const container = document.createElement("div")
-container.innerText = `
-  random hash: ${fxhash}\n
-  some pseudo random values: [ ${fxrand()}, ${fxrand()}, ${fxrand()}, ${fxrand()}, ${fxrand()},... ]\n
-`
-document.body.prepend(container)
+const seed = ~~ (fxrand() * 999999999)
+
+const sketch = p5 => {
+  const getSize = () => {
+    return p5.min(p5.windowHeight, p5.windowWidth)
+  }
+
+  p5.setup = () => {
+    p5.noLoop()
+
+    const size = getSize()
+    p5.createCanvas(size, size)
+  }
+
+  p5.windowResized = () => {
+    const size = getSize()
+    p5.resizeCanvas(size, size)
+  }
+
+  p5.draw = () => {
+    p5.randomSeed(seed)
+    p5.background("#dadada")
+    p5.text(`Random Hash: ${fxhash}`, 100, 100)
+    p5.text(`Psuedorandom: ${fxrand()}`, 100, 120)
+    p5.text(`Psuedorandom: ${fxrand()}`, 100, 140)
+  }
+}
+
+const instance = new p5(sketch, document.body)
