@@ -1,6 +1,14 @@
 body {
-  background-color: lightblue;
+  background-color: black;
 
   /* leave it to hide the scrollbars */
   overflow: hidden;
+
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
